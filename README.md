@@ -27,4 +27,4 @@ This project was created as an assignment for a React Class
 
 ### Author
 
-This project was built by Chris Bell
+This project was built by Chris Bell with starter code from Richard Kalehoff
