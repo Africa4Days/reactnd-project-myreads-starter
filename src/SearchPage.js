@@ -11,16 +11,20 @@ class SearchPage extends Component {
   }
 
   getBooks = (query) => {
-    if (query !== '') {
-      BooksAPI.search(query, 10).then((books) => {
+      BooksAPI.search(query).then((books) => {
         if (query === '') {
           this.setState({ foundBooks: [], query: query.trim() })
         }
         this.setState({ foundBooks: books, query: query.trim() })
       })
-    }
   }
 
+  getShelf = (books, id) => {
+    const book = this.props.books.find((b) => (
+      b.id === id
+    ))
+    return (book && book.shelf) ? book.shelf : 'none'
+  }
 
   render() {
     const { foundBooks, query } = this.state;
@@ -56,7 +60,8 @@ class SearchPage extends Component {
 
           </div>
         </div>
-        <div className="search-books-results">
+        <div className="search-books-books">
+          <h1 className='query-search'>Showing <span className='book-num'>{showBooks.length}</span> results for <span className='query-string'>"{query}"</span></h1>
           <ol className="books-grid">
             {showBooks.map((book) => (
               <li key={book.id}>
@@ -64,7 +69,7 @@ class SearchPage extends Component {
                   <div className="book-top">
                     <img src={book.imageLinks.thumbnail} alt="book" className='book-cover'></img>
                     <div className="book-shelf-changer">
-                      <select onChange={(event) => onShelfChange(book, event.target.value)} value={book.shelf}>
+                      <select onChange={(event) => onShelfChange(book, event.target.value)} defaultValue={this.getShelf(books, book.id)}>
                         <option value="none" disabled>Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>

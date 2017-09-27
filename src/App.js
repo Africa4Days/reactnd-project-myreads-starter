@@ -18,34 +18,16 @@ componentDidMount() {
   }
 
   onShelfChange = (bookToMove, toShelf) => {
-    BooksAPI.update(bookToMove, toShelf).then(() => (
-      this.setState((prevState) => {
-        const currentShelf = bookToMove.shelf;
-        let updatedBooks = null;
+    BooksAPI.update(bookToMove, toShelf).then(() => {
+      bookToMove.shelf = toShelf;
 
-        if (toShelf === 'none') {
-          // removing a book from a shelf
-          updatedBooks = prevState.books.filter((book) => (
-            book.id !== bookToMove.id
-          ))
-        } else if (currentShelf === 'none') {
-          // adding a book to a shelf
-          const updatedBook = { ...bookToMove, shelf: toShelf }
-          updatedBooks = [...prevState.books, updatedBook]
-        } else {
-          // moving a book from one shelf to another
-          updatedBooks = prevState.books.map((book) => {
-            const updatedBook = book;
-
-            if (book.id === bookToMove.id) {
-              updatedBook.shelf = toShelf
-            }
-            return updatedBook;
-          })
-        }
-        return { ...prevState, books: updatedBooks }
-      })
-    ))
+      let updatedBooks = this.state.books.filter((book) => (
+        book.id !== bookToMove.id
+      ))
+      
+      updatedBooks.push(bookToMove);
+      this.setState({ books: updatedBooks })
+    })
   }
 
   render() {

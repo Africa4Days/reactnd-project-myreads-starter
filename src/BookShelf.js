@@ -17,10 +17,19 @@ class BookShelf extends Component {
       book.shelf === 'read'
     ));
 
+    let d = new Date();
+
+    const weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+    const n = `${weekday[d.getDay()]} ${months[d.getUTCMonth() + 1]} ${d.getDate()}`;
+
     return (
       <div className="list-books">
+      <p className='date'>{n}</p>
         <div className="list-books-title">
-          <h1>MyReads</h1>
+          <h1>Bookshelf</h1>
         </div>
         <div className="list-books-content">
           <div>
