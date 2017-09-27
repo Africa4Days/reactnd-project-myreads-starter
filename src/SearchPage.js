@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import escapeRegExp from 'escape-string-regexp';
+import { Input, Popup } from 'semantic-ui-react';
 import * as BooksAPI from './BooksAPI';
 
 class SearchPage extends Component {
@@ -42,7 +43,7 @@ class SearchPage extends Component {
 
     return (
       <div className="search-books">
-        <div className="search-books-bar">
+        <div className="ui fluid icon input">
           <Link
             to='/'
             className='close-search'
@@ -56,7 +57,7 @@ class SearchPage extends Component {
               However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
               you don't find a specific author or title. Every search is limited by search terms.
             */}
-            <input type="text" placeholder="Search by title or author" onChange={(event) => this.getBooks(event.target.value)}/>
+            <Input fluid icon='search' type='text' placeholder="Search by title or author" onChange={(event) => this.getBooks(event.target.value)}/>
 
           </div>
         </div>
