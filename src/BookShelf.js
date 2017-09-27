@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Popup } from 'semantic-ui-react';
 
 class BookShelf extends Component {
 
@@ -43,13 +44,20 @@ class BookShelf extends Component {
                         <div className="book-top">
                           <img src={book.imageLinks.thumbnail} alt="book" className='book-cover'></img>
                           <div className="book-shelf-changer">
-                            <select onChange={(event) => onShelfChange(book, event.target.value)} value={book.shelf}>
-                              <option value="none" disabled>Move to...</option>
-                              <option value="currentlyReading">Currently Reading</option>
-                              <option value="wantToRead">Want to Read</option>
-                              <option value="read">Read</option>
-                              <option value="none">None</option>
-                            </select>
+                          <Popup
+                            trigger={
+                              <select name='select' onChange={(event) => onShelfChange(book, event.target.value)} defaultValue={book.shelf}>
+                                <option value="none" disabled>Move to...</option>
+                                <option value="currentlyReading">Currently Reading</option>
+                                <option value="wantToRead">Want to Read</option>
+                                <option value="read">Read</option>
+                                <option value="none">None</option>
+                              </select>
+                                      }
+                            content='Change shelves'
+                            on='hover'
+                            inverted
+                           />
                           </div>
                         </div>
                         <div className="book-title">{book.title}</div>
@@ -70,13 +78,20 @@ class BookShelf extends Component {
                       <div className="book-top">
                         <img src={book.imageLinks.thumbnail} alt="book" className='book-cover'></img>
                         <div className="book-shelf-changer">
-                          <select onChange={(event) => onShelfChange(book, event.target.value)} value={book.shelf}>
-                            <option value="none" disabled>Move to...</option>
-                            <option value="currentlyReading">Currently Reading</option>
-                            <option value="wantToRead">Want to Read</option>
-                            <option value="read">Read</option>
-                            <option value="none">None</option>
-                          </select>
+                        <Popup
+                          trigger={
+                            <select name='select' onChange={(event) => onShelfChange(book, event.target.value)} defaultValue={book.shelf}>
+                              <option value="none" disabled>Move to...</option>
+                              <option value="currentlyReading">Currently Reading</option>
+                              <option value="wantToRead">Want to Read</option>
+                              <option value="read">Read</option>
+                              <option value="none">None</option>
+                            </select>
+                                    }
+                          content='Change shelves'
+                          on='hover'
+                          inverted
+                         />
                         </div>
                       </div>
                       <div className="book-title">{book.title}</div>
@@ -97,13 +112,20 @@ class BookShelf extends Component {
                       <div className="book-top">
                         <img src={book.imageLinks.thumbnail} alt="book" className='book-cover'></img>
                         <div className="book-shelf-changer">
-                          <select onChange={(event) => onShelfChange(book, event.target.value)} value={book.shelf}>
-                            <option value="none" disabled>Move to...</option>
-                            <option value="currentlyReading">Currently Reading</option>
-                            <option value="wantToRead">Want to Read</option>
-                            <option value="read">Read</option>
-                            <option value="none">None</option>
-                          </select>
+                        <Popup
+                          trigger={
+                            <select name='select' onChange={(event) => onShelfChange(book, event.target.value)} defaultValue={book.shelf}>
+                              <option value="none" disabled>Move to...</option>
+                              <option value="currentlyReading">Currently Reading</option>
+                              <option value="wantToRead">Want to Read</option>
+                              <option value="read">Read</option>
+                              <option value="none">None</option>
+                            </select>
+                                    }
+                          content='Change shelf'
+                          on='hover'
+                          inverted
+                         />
                         </div>
                       </div>
                       <div className="book-title">{book.title}</div>

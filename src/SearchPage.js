@@ -70,7 +70,21 @@ class SearchPage extends Component {
                   <div className="book-top">
                     <img src={book.imageLinks.thumbnail} alt="book" className='book-cover'></img>
                     <div className="book-shelf-changer">
-                      <select onChange={(event) => onShelfChange(book, event.target.value)} defaultValue={this.getShelf(books, book.id)}>
+                    <Popup
+                      trigger={
+                        <select name='select' onChange={(event) => onShelfChange(book, event.target.value)} defaultValue={this.getShelf(books, book.id)}>
+                          <option value="none" disabled>Move to...</option>
+                          <option value="currentlyReading">Currently Reading</option>
+                          <option value="wantToRead">Want to Read</option>
+                          <option value="read">Read</option>
+                          <option value="none">None</option>
+                        </select>
+                                }
+                      content='Move to shelf'
+                      on='hover'
+                      inverted
+                     />
+                      <select name='select' onChange={(event) => onShelfChange(book, event.target.value)} defaultValue={this.getShelf(books, book.id)}>
                         <option value="none" disabled>Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>
