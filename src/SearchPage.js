@@ -1,8 +1,41 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import escapeRegExp from 'escape-string-regexp';
+import * as BooksAPI from './BooksAPI';
 
 class SearchPage extends Component {
+
+  state = {
+    foundBooks: [],
+    query: ''
+  }
+
+  getBooks = (query) => {
+    if (query !== '') {
+      BooksAPI.search(query, 10).then((books) => {
+        if (query === '') {
+          this.setState({ foundBooks: [], query: query.trim() })
+        }
+        this.setState({ foundBooks: books, query: query.trim() })
+      })
+    }
+  }
+
+
   render() {
+    const { foundBooks, query } = this.state;
+    const { books, onShelfChange } = this.props;
+
+    let showBooks
+    if (query) {
+      const match = new RegExp(escapeRegExp(query), 'i');
+      showBooks = foundBooks.filter((book) => (
+        match.test(book.title)
+      ))
+    } else {
+      showBooks = foundBooks;
+    }
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -19,12 +52,33 @@ class SearchPage extends Component {
               However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
               you don't find a specific author or title. Every search is limited by search terms.
             */}
-            <input type="text" placeholder="Search by title or author"/>
+            <input type="text" placeholder="Search by title or author" onChange={(event) => this.getBooks(event.target.value)}/>
 
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
+          <ol className="books-grid">
+            {showBooks.map((book) => (
+              <li key={book.id}>
+                <div className="book">
+                  <div className="book-top">
+                    <img src={book.imageLinks.thumbnail} alt="book" className='book-cover'></img>
+                    <div className="book-shelf-changer">
+                      <select onChange={(event) => onShelfChange(book, event.target.value)} value={book.shelf}>
+                        <option value="none" disabled>Move to...</option>
+                        <option value="currentlyReading">Currently Reading</option>
+                        <option value="wantToRead">Want to Read</option>
+                        <option value="read">Read</option>
+                        <option value="none">None</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="book-title">{book.title}</div>
+                  <div className="book-authors">{book.authors}</div>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     )
