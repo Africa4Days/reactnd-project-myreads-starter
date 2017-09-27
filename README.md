@@ -13,6 +13,18 @@ To start using the project right away:
 
 This app was build with: 
 
--React
--React Router
--Semantic UI
+* React
+* React Router
+* Semantic UI
+
+### BackEnd
+
+The API that this app gets the books from is found in the '/src/BooksAPI' folder
+
+### 
+
+This project was created as an assignment for a React Class
+
+### Author
+
+This project was built by Chris Bell
