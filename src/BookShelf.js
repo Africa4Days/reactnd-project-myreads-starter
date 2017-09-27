@@ -24,7 +24,7 @@ class BookShelf extends Component {
 
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
-    const n = `${weekday[d.getDay()]} ${months[d.getUTCMonth() + 1]} ${d.getDate()}`;
+    const n = `${weekday[d.getDay()]} ${months[d.getUTCMonth()]} ${d.getDate()}`;
 
     return (
       <div className="list-books">
